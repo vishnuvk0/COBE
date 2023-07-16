@@ -26,7 +26,7 @@ function Page3() {
 
   return (
     <div className="container mx-auto px-4 mt-20">
-      <h1 className="text-2xl font-bold mb-4">Onboarding - Pages 3 & 4</h1>
+      <h1 className="text-2xl font-bold mb-4">Personal Information</h1>
       <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="font-bold mb-2">Page 3: Personal Information</h2>
         <form onSubmit={handleSubmit}>
