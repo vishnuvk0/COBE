@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Page5() {
+function MainPage() {
   const salary = localStorage.getItem('salary');
   const biweeklySalary = salary / 26;
   const contribution = biweeklySalary * 0.10;
@@ -31,4 +31,4 @@ function Page5() {
   );
 }
 
-export default Page5;
+export default MainPage;

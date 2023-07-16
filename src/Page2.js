@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Page2() {
   const [age, setAge] = useState('');
+  const [salary, setSalary] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const salary = location.state.salary;
+
+  useEffect(() => {
+    if (location && location.state && location.state.salary) {
+      setSalary(location.state.salary);
+    }
+  }, [location]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate('/Page3', { state: { salary: salary, age: age } });
+    if(salary && age) {
+      navigate('/Page3', { state: { salary: salary, age: age } });
+    } else {
+      // Show error message that all fields must be filled
+    }
   };
 
   return (

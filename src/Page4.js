@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Page4() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { salary, age, retirementAge } = location.state;
+  const [salary, setSalary] = useState('');
+  const [age, setAge] = useState('');
+  const [retirementAge, setRetirementAge] = useState('');
   const [oldCompany, setOldCompany] = useState('');
   const [oldSalary, setOldSalary] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
+  useEffect(() => {
+    if (location && location.state) {
+      if(location.state.salary) setSalary(location.state.salary);
+      if(location.state.age) setAge(location.state.age);
+      if(location.state.retirementAge) setRetirementAge(location.state.retirementAge);
+    }
+  }, [location]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Save the old company and salary for later
-    localStorage.setItem('oldCompany', oldCompany);
-    localStorage.setItem('oldSalary', oldSalary);
-    navigate('/page5', { state: { salary: salary, age: age, retirementAge: retirementAge } });
+    if(salary && age && retirementAge && oldCompany && oldSalary) {
+      // Save the old company and salary for later
+      localStorage.setItem('oldCompany', oldCompany);
+      localStorage.setItem('oldSalary', oldSalary);
+      navigate('/page5', { state: { salary: salary, age: age, retirementAge: retirementAge } });
+    } else {
+      // Show error message that all fields must be filled
+    }
   };
 
   const handleCompanyChange = (event) => {
