@@ -27,7 +27,13 @@ function Page1() {
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mt-3">Password</label>
           <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
           <label htmlFor="company" className="block text-sm font-medium text-gray-700 mt-3">Company</label>
-          <input type="text" id="company" name="company" value={company} onChange={(e) => setCompany(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+          <select id="company" name="company" value={company} onChange={(e) => setCompany(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <option value="">Select a company</option>
+            <option value="Amazon">Amazon</option>
+            <option value="Google">Google</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Visa">Visa</option>
+          </select>
           <button type="submit" className="mt-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Login</button>
         </form>
       </div>

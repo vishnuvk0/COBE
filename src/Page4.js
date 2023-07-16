@@ -4,28 +4,25 @@ import { useNavigate, useLocation } from 'react-router-dom';
 function Page4() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [salary, setSalary] = useState('');
-  const [age, setAge] = useState('');
-  const [retirementAge, setRetirementAge] = useState('');
+  const [newSalary, setNewSalary] = useState('');
   const [oldCompany, setOldCompany] = useState('');
   const [oldSalary, setOldSalary] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (location && location.state) {
-      if(location.state.salary) setSalary(location.state.salary);
-      if(location.state.age) setAge(location.state.age);
-      if(location.state.retirementAge) setRetirementAge(location.state.retirementAge);
+      if(location.state.salary) setNewSalary(location.state.salary);
     }
   }, [location]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(salary && age && retirementAge && oldCompany && oldSalary) {
+    if(newSalary && oldCompany && oldSalary) {
       // Save the old company and salary for later
       localStorage.setItem('oldCompany', oldCompany);
       localStorage.setItem('oldSalary', oldSalary);
-      navigate('/page5', { state: { salary: salary, age: age, retirementAge: retirementAge } });
+      localStorage.setItem('newSalary', newSalary);
+      navigate('/MainPage', { state: { salary: newSalary } });
     } else {
       // Show error message that all fields must be filled
     }
@@ -47,7 +44,9 @@ function Page4() {
       <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="font-bold mb-2">Page 5: Previous Employment Information</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="oldCompany" className="block text-sm font-medium text-gray-700">Old Company</label>
+          <label htmlFor="newSalary" className="block text-sm font-medium text-gray-700">New Salary</label>
+          <input type="number" id="newSalary" name="newSalary" value={newSalary} onChange={(e) => setNewSalary(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+          <label htmlFor="oldCompany" className="block text-sm font-medium text-gray-700 mt-3">Old Company</label>
           <select id="oldCompany" name="oldCompany" value={oldCompany} onChange={handleCompanyChange} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             <option value="">Select a company</option>
             <option value="Visa">Visa</option>
